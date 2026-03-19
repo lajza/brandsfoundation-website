@@ -507,14 +507,7 @@
     #proof { background: var(--off-white); }
 
     .proof-intro {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: end;
       margin-bottom: 56px;
-    }
-    .proof-intro p {
-      font-size: 16px; line-height: 1.8; color: var(--muted);
     }
 
     .mosaic {
@@ -729,7 +722,6 @@
       .process-step { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; }
 
       /* Proof */
-      .proof-intro { grid-template-columns: 1fr; gap: 24px; }
       .mosaic { grid-template-columns: 1fr; grid-template-rows: auto; }
       .mosaic img, .mosaic > * { height: 260px; object-fit: cover; }
       .partners-row { flex-wrap: nowrap; gap: 20px; margin-top: 48px; padding-top: 32px; align-items: center; }
@@ -1069,15 +1061,11 @@
 <section id="proof" aria-labelledby="proof-heading">
   <div class="wrap" style="padding:0;">
     <div class="proof-intro rv">
-      <div>
-        <span class="label">Już działamy</span>
-        <h2 id="proof-heading" class="serif-lg" style="margin-top:16px;">
-          Jesteśmy częścią śląskiego ekosystemu. Nie od dziś.
-        </h2>
-      </div>
-      <div>
-        <p>Byliśmy na scenie RIG i KSSE. Prowadziliśmy warsztaty na konferencji AIBA. Budujemy sieć partnerów, którzy rozumieją, że silne marki to silny region.</p>
-      </div>
+      <span class="label">Już działamy</span>
+      <h2 id="proof-heading" class="serif-lg" style="margin-top:16px;">
+        Jesteśmy częścią śląskiego ekosystemu. Nie od dziś.
+      </h2>
+      <p style="margin-top:28px; max-width:840px; line-height:1.78; color:var(--muted);">Byliśmy na scenie RIG i KSSE. Prowadziliśmy warsztaty na konferencji AIBA. Budujemy sieć partnerów, którzy rozumieją, że silne marki to silny region.</p>
     </div>
 
     <div class="mosaic rv">
