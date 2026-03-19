@@ -5,3 +5,10 @@ package-lock.json
 section-shot.mjs
 screenshot.mjs
 serve.mjs
+.DS_Store
+.claude/
+pitch-decks/
+strategy/
+vpc/
+website/
+
