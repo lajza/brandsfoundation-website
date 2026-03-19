@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brands Foundation — Silne marki na Śląsku</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-Regular.otf') format('opentype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-RegularItalic.otf') format('opentype');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-Medium.otf') format('opentype');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-MediumItalic.otf') format('opentype');
+      font-weight: 500; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-SemiBold.otf') format('opentype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-SemiBoldItalic.otf') format('opentype');
+      font-weight: 600; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-Bold.otf') format('opentype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('fonts/Silesianum-BoldItalic.otf') format('opentype');
+      font-weight: 700; font-style: italic; font-display: swap;
+    }
+  </style>
+
+  <style>
+    /* ─── BRAND TOKENS ─────────────────────────────────────── */
+    :root {
+      --white:      #ffffff;
+      --off-white:  #EDE9E6;
+      --mid-gray:   #D2D0CB;
+      --warm-gray:  #A69C95;
+      --text:       #1A1A1A;
+      --muted:      #6B6560;
+      --border:     #D7D3D0;
+      --blue:       #4C64FF;
+      --blue-dark:  #2944F0;
+      --green:      #45C44B;
+      --green-dark: #2EAE34;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 21px;
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── TYPE SCALE ───────────────────────────────────────── */
+    .serif-xl {
+      font-family: 'Silesianum', serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(40px, 6.5vw, 86px);
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+    }
+    .serif-lg {
+      font-family: 'Silesianum', serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(28px, 3.6vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .serif-md {
+      font-family: 'Silesianum', serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.2;
+    }
+    .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .label-blue { color: var(--blue); }
+
+    /* ─── NAV ──────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: height 0.3s ease;
+    }
+    #nav.compact { height: 54px; }
+
+    .nav-logo img { height: 36px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.01em;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px; background: var(--text);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px;
+      background: var(--text); color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    .nav-cta:active { transform: translateY(0); }
+    .nav-cta:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    /* ─── BUTTONS ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 500; letter-spacing: 0.01em;
+      text-decoration: none; cursor: pointer; border: none;
+      padding: 15px 32px;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1),
+                  background 0.2s ease, color 0.2s ease;
+    }
+    .btn-black {
+      background: var(--text); color: var(--white);
+    }
+    .btn-black:hover { background: var(--blue); transform: translateY(-2px); }
+    .btn-black:active { transform: translateY(0); }
+    .btn-black:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--text); color: var(--text);
+    }
+    .btn-outline:hover { background: var(--text); color: var(--white); transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+    .btn-outline:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    .btn-blue {
+      background: var(--blue); color: var(--white);
+    }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-blue:active { transform: translateY(0); }
+    .btn-blue:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+    /* ─── LAYOUT ───────────────────────────────────────────── */
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+    section { padding: 112px 48px; }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── HERO ─────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 64px; /* nav height */
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      padding: 80px 48px 80px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 40px;
+      opacity: 0; transform: translateY(12px);
+      animation: up 0.7s 0.1s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    .eyebrow-line {
+      width: 32px; height: 1.5px; background: var(--blue);
+    }
+
+    .hero-title {
+      opacity: 0; transform: translateY(24px);
+      animation: up 0.9s 0.25s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    .hero-body {
+      margin-top: 32px;
+      max-width: 440px;
+      font-size: 16px; line-height: 1.75; color: var(--muted);
+      opacity: 0; transform: translateY(18px);
+      animation: up 0.8s 0.45s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    .hero-actions {
+      margin-top: 44px;
+      display: flex; align-items: center; gap: 16px;
+      opacity: 0; transform: translateY(14px);
+      animation: up 0.75s 0.6s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    /* Testimonial card */
+    .hero-testimonial {
+      margin-top: 56px;
+      padding: 20px 24px;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      max-width: 360px;
+      opacity: 0;
+      animation: fadein 0.8s 1s ease forwards;
+    }
+    .stars { color: var(--blue); font-size: 14px; letter-spacing: 2px; margin-bottom: 8px; }
+    .testimonial-text { font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--off-white);
+      opacity: 0;
+      animation: fadein 1s 0.3s ease forwards;
+    }
+    .hero-right img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .hero-right-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+
+    /* ─── PROBLEM ──────────────────────────────────────────── */
+    #problem { background: var(--white); }
+
+    .problem-header {
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .statements {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 0;
+    }
+
+    .stat-card {
+      padding: 48px 40px 40px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .stat-card:last-child { border-right: none; }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--mid-gray);
+    }
+    .stat-card:first-child::before { background: var(--blue); }
+
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      color: var(--muted); margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .stat-text {
+      font-family: 'Silesianum', serif;
+      font-size: 18px; font-weight: 600; font-style: normal;
+      line-height: 1.45;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .stat-source {
+      font-size: 11px; color: var(--warm-gray);
+      font-style: italic;
+    }
+
+    /* ─── ABOUT ────────────────────────────────────────────── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-image-wrap {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .about-image-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .about-image-wrap:hover img { transform: scale(1.03); }
+
+    .about-text { padding-top: 8px; }
+    .about-text p {
+      margin-top: 20px;
+      font-size: 16px; line-height: 1.8; color: var(--muted);
+    }
+
+    .team-section { margin-top: 96px; }
+    .section-rule {
+      width: 100%; height: 1px;
+      background: var(--border);
+      margin-bottom: 48px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 16px;
+    }
+    .team-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4; background: var(--off-white);
+    }
+    .team-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .team-card:hover img { transform: scale(1.04); }
+    .team-card-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 18px 20px;
+      background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 100%);
+    }
+    .tc-name {
+      font-family: 'Silesianum', serif;
+      font-size: 16px; font-weight: 600; font-style: normal; color: #fff;
+    }
+    .tc-role {
+      font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px;
+    }
+
+    /* Team card hover bio overlay */
+    .team-card-bio {
+      position: absolute; inset: 0;
+      background: rgba(26,26,26,0.94);
+      padding: 28px 24px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.32s ease, transform 0.32s ease;
+      pointer-events: none;
+    }
+    .team-card:hover .team-card-bio {
+      opacity: 1; transform: translateY(0);
+      pointer-events: auto;
+    }
+    .tc-bio-name {
+      font-family: 'Silesianum', serif;
+      font-size: 20px; font-weight: 600; font-style: normal;
+      color: #fff; margin-bottom: 4px;
+    }
+    .tc-bio-role {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 14px;
+    }
+    .tc-bio-text {
+      font-size: 13px; line-height: 1.72;
+      color: rgba(255,255,255,0.62);
+    }
+
+    /* About intro full-width */
+    .about-intro {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .about-intro-body {
+      margin-top: 28px;
+      max-width: 840px;
+    }
+    .about-intro-body p + p {
+      margin-top: 20px;
+    }
+    .about-intro-body p {
+      font-size: 16px; line-height: 1.8; color: var(--muted);
+    }
+
+    /* ─── PROCESS ──────────────────────────────────────────── */
+    #process { background: var(--text); color: var(--white); }
+    #process .label { color: rgba(255,255,255,0.4); }
+
+    .process-intro {
+      margin-bottom: 64px;
+    }
+    .process-intro p {
+      margin-top: 28px;
+      max-width: 840px;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .process-step {
+      padding: 52px 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      position: relative; overflow: hidden;
+    }
+    .process-step:last-child { border-right: none; }
+
+    .step-bg-num {
+      position: absolute; top: -8px; right: 24px;
+      font-family: 'Silesianum', serif;
+      font-size: 120px; font-weight: 600; font-style: normal;
+      line-height: 1;
+      color: rgba(255,255,255,0.04);
+      user-select: none; pointer-events: none;
+    }
+    .step-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue); margin-bottom: 20px;
+    }
+    .step-title {
+      font-family: 'Silesianum', serif;
+      font-size: 28px; font-weight: 600; font-style: normal;
+      color: #fff; margin-bottom: 16px;
+    }
+    .step-body {
+      font-size: 14px; line-height: 1.78;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .process-cta {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .process-cta p {
+      font-family: 'Silesianum', serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(20px, 2.5vw, 30px);
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ─── PROOF ────────────────────────────────────────────── */
+    #proof { background: var(--off-white); }
+
+    .proof-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+    .proof-intro p {
+      font-size: 16px; line-height: 1.8; color: var(--muted);
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 480px;
+      gap: 2px;
+    }
+    .mosaic-item {
+      position: relative; overflow: hidden;
+      background: var(--mid-gray);
+    }
+    .mosaic-item.tall { grid-row: span 2; }
+    .mosaic-item.wide { grid-column: span 2; }
+
+    .mosaic-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .mosaic-item:hover img { transform: scale(1.04); }
+    .mosaic-item .m-label {
+      position: absolute; bottom: 14px; left: 16px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .partners-row {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 40px;
+    }
+    .partner-divider { width: 1px; height: 24px; background: var(--border); }
+    .partner-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 400;
+      color: var(--muted);
+      transition: color 0.2s ease; text-decoration: none;
+    }
+    .partner-name:hover { color: var(--text); }
+
+    /* ─── FAQ ──────────────────────────────────────────────── */
+    #faq { background: var(--white); }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-sticky { position: sticky; top: 80px; }
+
+    .faq-list { }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-btn {
+      width: 100%; text-align: left;
+      padding: 24px 0;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;
+      cursor: pointer; background: none; border: none;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px; font-weight: 400; line-height: 1.45;
+      transition: color 0.2s ease;
+    }
+    .faq-btn:hover { color: var(--blue); }
+    .faq-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    .faq-icon {
+      flex-shrink: 0; margin-top: 1px;
+      width: 22px; height: 22px;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; line-height: 1; color: var(--muted);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                  border-color 0.2s ease,
+                  background 0.2s ease,
+                  color 0.2s ease;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .faq-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1);
+    }
+    .faq-item.open .faq-body { max-height: 400px; }
+    .faq-body p {
+      padding-bottom: 24px;
+      font-size: 14px; line-height: 1.82; color: var(--muted);
+    }
+
+    /* ─── CONTACT ──────────────────────────────────────────── */
+    #contact { background: var(--off-white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .contact-left p {
+      margin-top: 24px;
+      font-size: 16px; line-height: 1.8; color: var(--muted);
+    }
+    .contact-meta {
+      margin-top: 44px; padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+    }
+    .contact-meta a {
+      color: var(--blue); text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    .contact-meta a:hover { opacity: 0.72; }
+
+    .form-group { margin-bottom: 32px; }
+    .form-label {
+      display: block;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray); margin-bottom: 9px;
+    }
+    .form-field {
+      width: 100%; background: transparent; border: none;
+      border-bottom: 1.5px solid var(--border);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px; font-weight: 300;
+      padding: 10px 0; outline: none;
+      transition: border-color 0.22s ease;
+    }
+    .form-field::placeholder { color: var(--mid-gray); }
+    .form-field:focus { border-bottom-color: var(--blue); }
+    textarea.form-field { resize: none; height: 76px; }
+
+    /* ─── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,0.45);
+      padding: 52px 48px;
+    }
+    .footer-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo img { height: 28px; opacity: 0.7; }
+    .footer-copy { font-size: 12px; margin-top: 8px; }
+
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-size: 12px; color: rgba(255,255,255,0.4);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+    .footer-links a:focus-visible { outline: 1px solid var(--blue); outline-offset: 4px; }
+
+    /* ─── SCROLL REVEAL ────────────────────────────────────── */
+    .rv {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .rv.in { opacity: 1; transform: translateY(0); }
+    .rv.d1 { transition-delay: 0.1s; }
+    .rv.d2 { transition-delay: 0.2s; }
+    .rv.d3 { transition-delay: 0.3s; }
+
+    /* ─── KEYFRAMES ────────────────────────────────────────── */
+    @keyframes up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadein {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+<header id="nav" role="banner">
+  <a href="#" class="nav-logo" aria-label="Brands Foundation">
+    <img src="brand/logo_black.svg" alt="Brands Foundation" />
+  </a>
+
+  <nav aria-label="Nawigacja główna">
+    <ul class="nav-links">
+      <li><a href="#problem">Znamy to</a></li>
+      <li><a href="#about">Kim jesteśmy</a></li>
+      <li><a href="#process">Jak działamy</a></li>
+      <li><a href="#proof">Już działamy</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </nav>
+
+  <a href="#contact" class="nav-cta">Porozmawiajmy →</a>
+</header>
+
+
+<!-- ═══ BEAMS / CLAIM ══════════════════════════════════════════ -->
+<section id="claim" aria-label="Misja fundacji" style="position:relative;min-height:100vh;overflow:hidden;background:#B8B3AC;display:flex;align-items:center;justify-content:center;">
+
+  <!-- Canvas beams -->
+  <canvas id="beams-canvas" style="position:absolute;inset:0;width:100%;height:100%;filter:blur(15px);"></canvas>
+
+  <!-- Pulsing vignette overlay -->
+  <div id="beams-vignette" style="position:absolute;inset:0;background:rgba(237,233,230,0.05);backdrop-filter:blur(50px);"></div>
+
+  <!-- Content -->
+  <div style="position:relative;z-index:10;text-align:center;padding:48px;max-width:1000px;">
+    <h2 style="font-family:'Silesianum',serif;font-style:normal;font-weight:600;font-size:clamp(36px,7vw,92px);line-height:1.05;letter-spacing:-0.01em;color:#1A1A1A;" class="beams-fade-in">
+      Silne marki na Śląsku<br>budują silną markę Śląska.
+    </h2>
+
+    <p style="font-family:'Inter',sans-serif;font-size:clamp(17px,1.4vw,20px);font-weight:600;line-height:1.78;color:rgba(26,26,26,0.5);margin-top:36px;max-width:560px;margin-left:auto;margin-right:auto;" class="beams-fade-in beams-delay-1">
+      Śląsk przez dekady był kojarzony z ciężką pracą.<br>
+      Dziś chcemy, by był kojarzony również z silnymi,<br>
+      nowoczesnymi markami, które mają znaczenie w Polsce i Europie.
+    </p>
+
+    <div style="margin-top:48px;" class="beams-fade-in beams-delay-2">
+      <a href="#contact" style="display:inline-flex;align-items:center;gap:8px;padding:15px 34px;background:#1A1A1A;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.01em;text-decoration:none;transition:background 0.2s ease,transform 0.2s cubic-bezier(0.34,1.56,0.64,1);"
+         onmouseover="this.style.background='#4C64FF';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.background='#1A1A1A';this.style.transform='translateY(0)'">
+        Porozmawiajmy →
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .beams-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1);
+  }
+  .beams-fade-in.beams-visible { opacity: 1; transform: translateY(0); }
+  .beams-delay-1 { transition-delay: 0.15s; }
+  .beams-delay-2 { transition-delay: 0.3s; }
+  .beams-delay-3 { transition-delay: 0.45s; }
+
+  @keyframes beams-pulse {
+    0%, 100% { opacity: 0.03; }
+    50% { opacity: 0.08; }
+  }
+  #beams-vignette { animation: beams-pulse 10s ease-in-out infinite; }
+</style>
+
+<script>
+(function() {
+  const canvas = document.getElementById('beams-canvas');
+  const ctx = canvas.getContext('2d');
+  let beams = [];
+  let rafId;
+  const BEAM_COUNT = 30;
+
+  // Brand-aligned hue: 220–250 (blue range matching #4C64FF)
+  function createBeam(w, h) {
+    const angle = -35 + Math.random() * 10;
+    return {
+      x:         Math.random() * w * 1.5 - w * 0.25,
+      y:         Math.random() * h * 1.5 - h * 0.25,
+      width:     30 + Math.random() * 60,
+      length:    h * 2.5,
+      angle:     angle,
+      speed:     0.6 + Math.random() * 1.2,
+      opacity:   0.35 + Math.random() * 0.3,
+      hue:       0,   // pure white beams on light background
+      pulse:     Math.random() * Math.PI * 2,
+      pulseSpeed: 0.02 + Math.random() * 0.03,
+    };
+  }
+
+  function resetBeam(beam, index, total, w, h) {
+    const col = index % 3;
+    const spacing = w / 3;
+    beam.y       = h + 100;
+    beam.x       = col * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.5;
+    beam.width   = 100 + Math.random() * 100;
+    beam.speed   = 0.5 + Math.random() * 0.4;
+    beam.hue     = 0;
+    beam.opacity = 0.4 + Math.random() * 0.2;
+    return beam;
+  }
+
+  function drawBeam(beam) {
+    ctx.save();
+    ctx.translate(beam.x, beam.y);
+    ctx.rotate(beam.angle * Math.PI / 180);
+    const po = beam.opacity * (0.8 + Math.sin(beam.pulse) * 0.2);
+    const g  = ctx.createLinearGradient(0, 0, 0, beam.length);
+    g.addColorStop(0,   `hsla(${beam.hue},6%,100%,0)`);
+    g.addColorStop(0.1, `hsla(${beam.hue},6%,100%,${po * 0.5})`);
+    g.addColorStop(0.4, `hsla(${beam.hue},6%,100%,${po})`);
+    g.addColorStop(0.6, `hsla(${beam.hue},6%,100%,${po})`);
+    g.addColorStop(0.9, `hsla(${beam.hue},6%,100%,${po * 0.5})`);
+    g.addColorStop(1,   `hsla(${beam.hue},6%,100%,0)`);
+    ctx.fillStyle = g;
+    ctx.fillRect(-beam.width / 2, 0, beam.width, beam.length);
+    ctx.restore();
+  }
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const w   = canvas.parentElement.offsetWidth;
+    const h   = canvas.parentElement.offsetHeight;
+    canvas.width  = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+    beams = Array.from({ length: BEAM_COUNT }, () => createBeam(w, h));
+  }
+
+  function animate() {
+    const w = canvas.parentElement.offsetWidth;
+    const h = canvas.parentElement.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+    ctx.filter = 'blur(35px)';
+    beams.forEach((beam, i) => {
+      beam.y     -= beam.speed;
+      beam.pulse += beam.pulseSpeed;
+      if (beam.y + beam.length < -100) resetBeam(beam, i, beams.length, w, h);
+      drawBeam(beam);
+    });
+    rafId = requestAnimationFrame(animate);
+  }
+
+  // Start when section enters viewport (lazy)
+  const section = document.getElementById('claim');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        resize();
+        animate();
+        // Reveal text
+        section.querySelectorAll('.beams-fade-in').forEach(el => el.classList.add('beams-visible'));
+      } else {
+        cancelAnimationFrame(rafId);
+      }
+    });
+  }, { threshold: 0.1 });
+  io.observe(section);
+
+  window.addEventListener('resize', () => {
+    if (rafId) { cancelAnimationFrame(rafId); resize(); animate(); }
+  }, { passive: true });
+})();
+</script>
+
+<!-- ═══ PROBLEM ════════════════════════════════════════════════ -->
+<section id="problem" aria-labelledby="problem-heading">
+  <div class="wrap" style="padding:0;">
+    <div class="problem-header rv">
+      <span class="label">Znamy to.</span>
+      <h2 id="problem-heading" class="serif-lg" style="margin-top:16px;">
+        Dobry produkt powinien bronić się sam.<br>Niestety rynek tak nie działa.
+      </h2>
+    </div>
+
+    <div class="statements" style="margin-top:2px; border-top:1px solid var(--border);">
+      <div class="stat-card rv d1">
+        <div class="stat-num">01</div>
+        <p class="stat-text">Firmy z silną marką konsekwentnie wygrywają z konkurencją — niezależnie od koniunktury.</p>
+        <p class="stat-source">Kantar BrandZ, 20 lat badań</p>
+      </div>
+      <div class="stat-card rv d2">
+        <div class="stat-num">02</div>
+        <p class="stat-text">Marki, które konkurują wyłącznie produktem i ceną, tracą kontrolę nad swoją pozycją. Stają się wymienne.</p>
+        <p class="stat-source">Interbrand Best Global Brands 2025</p>
+      </div>
+      <div class="stat-card rv d3">
+        <div class="stat-num">03</div>
+        <p class="stat-text">Silna marka to nie koszt — to jedyny wskaźnik, który napędza wzrost zarówno dziś, jak i w przyszłości.</p>
+        <p class="stat-source">Interbrand Best Global Brands 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ABOUT ══════════════════════════════════════════════════ -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="wrap" style="padding:0;">
+
+    <!-- Full-width claim + body -->
+    <div class="about-intro rv">
+      <span class="label">Kim jesteśmy</span>
+      <h2 id="about-heading" class="serif-lg" style="margin-top:16px; max-width:840px;">
+        Jesteśmy w tym prawdziwi.<br>Jesteśmy Ślązakami.
+      </h2>
+      <div class="about-intro-body">
+        <p>Tutaj się urodziliśmy, wychowywaliśmy, studiowaliśmy, pracujemy i wychowujemy nasze dzieci.</p>
+        <p>Brands Foundation powstała z przekonania, że śląskie firmy mają potencjał, którego rynek jeszcze nie widzi. Nie jesteśmy agencją marketingową. Przychodzimy z doświadczeniem i chęcią do pracy — razem z Wami.</p>
+      </div>
+    </div>
+
+    <!-- Team with hover bios -->
+    <div class="team-section">
+      <div class="rv">
+        <span class="label">Ludzie, którzy za tym stoją</span>
+      </div>
+      <div class="team-grid">
+
+        <div class="team-card rv d1">
+          <img src="brand/Filip.png" alt="Filip Nocek" />
+          <div class="team-card-info">
+            <div class="tc-name">Filip Nocek</div>
+            <div class="tc-role">Business &amp; Strategy</div>
+          </div>
+          <div class="team-card-bio">
+            <div class="tc-bio-name">Filip Nocek</div>
+            <div class="tc-bio-role">Business &amp; Strategy</div>
+            <p class="tc-bio-text">Analityk finansowy z ponad dekadą doświadczenia na przecięciu strategii, rozwoju biznesu i marketingu. Urodził się i wychował w Rudzie Śląskiej. Wierzy, że Śląsk zasługuje na markę na miarę swojego potencjału.</p>
+          </div>
+        </div>
+
+        <div class="team-card rv d2">
+          <img src="brand/Pawel.png" alt="Paweł Mikołajec" />
+          <div class="team-card-info">
+            <div class="tc-name">Paweł Mikołajec</div>
+            <div class="tc-role">Brand &amp; Strategy</div>
+          </div>
+          <div class="team-card-bio">
+            <div class="tc-bio-name">Paweł Mikołajec</div>
+            <div class="tc-bio-role">Brand &amp; Strategy</div>
+            <p class="tc-bio-text">Autochton śląski, brandingiem zajmuje się od 15 lat. Studiował projektowanie graficzne w Raciborzu, studio brandingowe założył w Katowicach. Całe jego życie związane jest ze Śląskiem.</p>
+          </div>
+        </div>
+
+        <div class="team-card rv d3">
+          <img src="brand/Ola.png" alt="Aleksandra Śliwa" />
+          <div class="team-card-info">
+            <div class="tc-name">Aleksandra Śliwa</div>
+            <div class="tc-role">Legal</div>
+          </div>
+          <div class="team-card-bio">
+            <div class="tc-bio-name">Aleksandra Śliwa</div>
+            <div class="tc-bio-role">Legal</div>
+            <p class="tc-bio-text">Radczyni prawna specjalizująca się w prawie nieruchomości i projektach inwestycyjnych. Autochtonka śląska zaangażowana w działania na rzecz języka i kultury śląskiej. Śląsk traktuje jako punkt odniesienia swoich wartości.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PROCESS ════════════════════════════════════════════════ -->
+<section id="process" aria-labelledby="process-heading">
+  <div class="wrap" style="padding:0;">
+    <div class="process-intro rv">
+      <span class="label">Jak działamy</span>
+      <h2 id="process-heading" class="serif-lg" style="margin-top:16px; color:#fff;">
+        Transformacja marki nie musi być skomplikowana.
+      </h2>
+      <p>Zaczynamy od rozmowy — bez formularzy, bez ofert, bez presji. Wspólnie diagnozujemy, gdzie firma stoi i dokąd chce dotrzeć. Potem działamy — krok po kroku, z jasnym planem i mierzalnymi efektami.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step rv d1">
+        <div class="step-bg-num" aria-hidden="true">1</div>
+        <div class="step-label">Krok 01</div>
+        <div class="step-title">Diagnoza</div>
+        <p class="step-body">Rozumiemy Waszą firmę, rynek i wyzwania. Bez założeń.</p>
+      </div>
+      <div class="process-step rv d2">
+        <div class="step-bg-num" aria-hidden="true">2</div>
+        <div class="step-label">Krok 02</div>
+        <div class="step-title">Transformacja</div>
+        <p class="step-body">Wspólnie budujemy markę, która działa — spójna, wyraźna, gotowa na wzrost.</p>
+      </div>
+      <div class="process-step rv d3">
+        <div class="step-bg-num" aria-hidden="true">3</div>
+        <div class="step-label">Krok 03</div>
+        <div class="step-title">Efekty</div>
+        <p class="step-body">Mierzalne rezultaty. Pierwsze widoczne w 30 dni.</p>
+      </div>
+    </div>
+
+    <div class="process-cta rv">
+      <p>Gotowi na rozmowę?</p>
+      <a href="#contact" class="btn btn-blue">Porozmawiajmy →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PROOF ══════════════════════════════════════════════════ -->
+<section id="proof" aria-labelledby="proof-heading">
+  <div class="wrap" style="padding:0;">
+    <div class="proof-intro rv">
+      <div>
+        <span class="label">Już działamy</span>
+        <h2 id="proof-heading" class="serif-lg" style="margin-top:16px;">
+          Jesteśmy częścią śląskiego ekosystemu. Nie od dziś.
+        </h2>
+      </div>
+      <div>
+        <p>Byliśmy na scenie RIG i KSSE. Prowadziliśmy warsztaty na konferencji AIBA. Budujemy sieć partnerów, którzy rozumieją, że silne marki to silny region.</p>
+      </div>
+    </div>
+
+    <div class="mosaic rv">
+      <div class="mosaic-item">
+        <img src="brand/AIBA.jpeg" alt="Warsztaty AIBA" />
+        <div class="m-label">Warsztaty AIBA</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="brand/RIG.jpeg" alt="RIG" />
+        <div class="m-label">RIG</div>
+      </div>
+      <div class="mosaic-item">
+        <img src="brand/ksse.jpeg" alt="KSSE" />
+        <div class="m-label">KSSE</div>
+      </div>
+    </div>
+
+    <div class="partners-row rv">
+      <span class="label">Partnerzy fundacji</span>
+      <div class="partner-divider" aria-hidden="true"></div>
+      <a href="https://slaskiestartupy.pl/" target="_blank" rel="noopener noreferrer">
+        <img src="partners/Silesian Startup Foundation Logo.png" alt="Silesian Startup Foundation" style="height:64px;width:auto;opacity:0.7;transition:opacity 0.2s ease;display:block;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+      </a>
+      <div class="partner-divider" aria-hidden="true"></div>
+      <a href="https://ancy.pl/" target="_blank" rel="noopener noreferrer">
+        <img src="partners/ancy_logo.png" alt="Ancy" style="height:56px;width:auto;opacity:0.7;transition:opacity 0.2s ease;display:block;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FAQ ════════════════════════════════════════════════════ -->
+<section id="faq" aria-labelledby="faq-heading">
+  <div class="wrap" style="padding:0;">
+    <div class="faq-layout">
+      <div class="faq-sticky rv">
+        <span class="label">FAQ</span>
+        <h2 id="faq-heading" class="serif-lg" style="margin-top:16px;">
+          Najczęstsze pytania
+        </h2>
+        <p style="margin-top:20px; font-size:15px; line-height:1.78; color:var(--muted);">
+          Masz inne pytanie? Napisz do nas bezpośrednio.
+        </p>
+        <div style="margin-top:32px;">
+          <a href="#contact" class="btn btn-outline">Napisz do nas →</a>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item rv">
+          <button class="faq-btn" aria-expanded="false">
+            Czy to jest dla firm naszej wielkości?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" role="region">
+            <p>Pracujemy ze śląskimi MŚP — firmami rodzinnymi, zakładami produkcyjnymi, lokalnymi usługodawcami. Jeśli czujecie, że Wasza marka nie nadąża za jakością tego, co robicie — porozmawiajmy.</p>
+          </div>
+        </div>
+
+        <div class="faq-item rv d1">
+          <button class="faq-btn" aria-expanded="false">
+            Nie mamy teraz budżetu na marketing.
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" role="region">
+            <p>Brands Foundation nie jest agencją marketingową — nie sprzedajemy kampanii ani reklam. Nasz program to transformacja strategiczna, która porządkuje to, co już macie. Zaczynamy od rozmowy, żeby razem ocenić, co ma sens na tym etapie.</p>
+          </div>
+        </div>
+
+        <div class="faq-item rv d1">
+          <button class="faq-btn" aria-expanded="false">
+            Nie mamy czasu na dodatkowe projekty.
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" role="region">
+            <p>Rozumiemy to. Dlatego nie dokładamy kolejnego projektu do listy — wchodzimy w rytm pracy firmy i dopasowujemy tempo do Waszych możliwości.</p>
+          </div>
+        </div>
+
+        <div class="faq-item rv d2">
+          <button class="faq-btn" aria-expanded="false">
+            Jakich efektów możemy się spodziewać i kiedy?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" role="region">
+            <p>Pierwsze efekty — jasne pozycjonowanie, spójna strategia komunikacji, konkretny plan działania — są wypracowywane już w trakcie warsztatów. Głębsza zmiana, która przekłada się na klientów i talenty, wymaga czasu. Mówimy o tym wprost od pierwszej rozmowy.</p>
+          </div>
+        </div>
+
+        <div class="faq-item rv d2">
+          <button class="faq-btn" aria-expanded="false">
+            Czy musimy wiedzieć, czego chcemy, żeby zacząć?
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-body" role="region">
+            <p>Nie. Często zaczynamy właśnie od tego — od braku jasności. Pierwsza rozmowa służy temu, żeby wspólnie nazwać, gdzie jesteście i dokąd chcecie dotrzeć.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CONTACT ════════════════════════════════════════════════ -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="wrap" style="padding:0;">
+    <div class="contact-grid">
+      <div class="contact-left rv">
+        <span class="label">Kontakt</span>
+        <h2 id="contact-heading" class="serif-lg" style="margin-top:16px;">
+          Zacznijmy od rozmowy.
+        </h2>
+        <p>Nie potrzebujesz gotowego briefu. Wystarczy, że czujesz, że coś warto zmienić. Resztą zajmiemy się razem.</p>
+        <div class="contact-meta">
+          lub napisz bezpośrednio:
+          <a href="mailto:hello@brandsfoundation.pl">hello@brandsfoundation.pl</a>
+        </div>
+      </div>
+
+      <form class="rv d1" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="f-name">Imię i nazwisko</label>
+          <input id="f-name" type="text" class="form-field" placeholder="Jan Kowalski" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-company">Firma</label>
+          <input id="f-company" type="text" class="form-field" placeholder="Nazwa firmy" autocomplete="organization" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-contact">Adres e-mail lub telefon</label>
+          <input id="f-contact" type="text" class="form-field" placeholder="jan@firma.pl lub +48 500 000 000" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-message">Co chcesz zmienić w swojej marce? <span style="opacity:.5;">(opcjonalne)</span></label>
+          <textarea id="f-message" class="form-field" placeholder="Opisz swoją sytuację w kilku słowach..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-black" style="width:100%; justify-content:center;">
+          Porozmawiajmy →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="brand/logo_white.svg" alt="Brands Foundation" />
+      <p class="footer-copy">© 2026 Brands Foundation. Katowice, Śląsk.</p>
+    </div>
+    <nav class="footer-links" aria-label="Linki stopki">
+      <a href="#problem">Znamy to</a>
+      <a href="#about">Kim jesteśmy</a>
+      <a href="#process">Jak działamy</a>
+      <a href="#proof">Już działamy</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </div>
+</footer>
+
+
+<script>
+/* ── Nav compact on scroll ─────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('compact', window.scrollY > 80);
+}, { passive: true });
+
+/* ── Scroll reveal ─────────────────────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+/* ── FAQ accordion ─────────────────────────────────────────── */
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ── Form submit ───────────────────────────────────────────── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type=submit]');
+  btn.textContent = 'Dziękujemy — odezwiemy się wkrótce ✓';
+  btn.style.background = 'var(--green)';
+  btn.disabled = true;
+}
+</script>
+
+</body>
+</html>
