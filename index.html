@@ -326,8 +326,7 @@
       color: var(--text); margin-bottom: 20px;
     }
     .stat-source {
-      font-size: 11px; color: var(--warm-gray);
-      font-style: italic;
+      font-size: 11px; color: var(--muted);
     }
 
     /* ─── ABOUT ────────────────────────────────────────────── */
@@ -633,7 +632,7 @@
       display: block;
       font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--warm-gray); margin-bottom: 9px;
+      color: var(--muted); margin-bottom: 9px;
     }
     .form-field {
       width: 100%; background: transparent; border: none;
@@ -644,7 +643,7 @@
       padding: 10px 0; outline: none;
       transition: border-color 0.22s ease;
     }
-    .form-field::placeholder { color: var(--mid-gray); }
+    .form-field::placeholder { color: var(--muted); }
     .form-field:focus { border-bottom-color: var(--blue); }
     textarea.form-field { resize: none; height: 76px; }
 
@@ -827,7 +826,7 @@
 
 <section id="claim" aria-label="Misja fundacji">
   <!-- Background: B photo -->
-  <img class="claim-bg" src="website/B 16X9.png" alt="" aria-hidden="true" />
+  <img class="claim-bg" src="brand/B 16X9.png" alt="" aria-hidden="true" />
 
   <!-- Content -->
   <div class="claim-content">
@@ -1107,40 +1106,15 @@
 <!-- ═══ CONTACT ════════════════════════════════════════════════ -->
 <section id="contact" aria-labelledby="contact-heading">
   <div class="wrap" style="padding:0;">
-    <div class="contact-grid">
-      <div class="contact-left rv">
-        <span class="label">Kontakt</span>
-        <h2 id="contact-heading" class="serif-lg" style="margin-top:16px;">
-          Zacznijmy od rozmowy.
-        </h2>
-        <p>Nie potrzebujesz gotowego briefu. Wystarczy, że czujesz, że coś warto zmienić. Resztą zajmiemy się razem.</p>
-        <div class="contact-meta">
-          lub napisz bezpośrednio:
-          <a href="mailto:hello@brandsfoundation.pl">hello@brandsfoundation.pl</a>
-        </div>
+    <div class="contact-left rv" style="max-width:560px;">
+      <span class="label">Kontakt</span>
+      <h2 id="contact-heading" class="serif-lg" style="margin-top:16px;">
+        Zacznijmy od rozmowy.
+      </h2>
+      <p>Nie potrzebujesz gotowego briefu. Wystarczy, że czujesz, że coś warto zmienić. Resztą zajmiemy się razem.</p>
+      <div style="margin-top:32px;">
+        <a href="mailto:hello@brandsfoundation.com" style="font-family:'Inter',sans-serif;font-size:16px;color:var(--text);text-decoration:underline;text-underline-offset:3px;">hello@brandsfoundation.com</a>
       </div>
-
-      <form class="rv d1" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label class="form-label" for="f-name">Imię i nazwisko</label>
-          <input id="f-name" type="text" class="form-field" placeholder="Jan Kowalski" autocomplete="name" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="f-company">Firma</label>
-          <input id="f-company" type="text" class="form-field" placeholder="Nazwa firmy" autocomplete="organization" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="f-contact">Adres e-mail lub telefon</label>
-          <input id="f-contact" type="text" class="form-field" placeholder="jan@firma.pl lub +48 500 000 000" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="f-message">Co chcesz zmienić w swojej marce? <span style="opacity:.5;">(opcjonalne)</span></label>
-          <textarea id="f-message" class="form-field" placeholder="Opisz swoją sytuację w kilku słowach..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-black" style="width:100%; justify-content:center;">
-          Porozmawiajmy →
-        </button>
-      </form>
     </div>
   </div>
 </section>
