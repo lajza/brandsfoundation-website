@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Czy marka tworzy miejsce, czy miejsce tworzy markę? — Brands Foundation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('../brand/fonts/Silesianum-Regular.otf') format('opentype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('../brand/fonts/Silesianum-RegularItalic.otf') format('opentype');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('../brand/fonts/Silesianum-SemiBold.otf') format('opentype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+  </style>
+
+  <style>
+    /* ─── BRAND TOKENS ─────────────────────────────────────── */
+    :root {
+      --white:      #ffffff;
+      --off-white:  #EDE9E6;
+      --mid-gray:   #D2D0CB;
+      --text:       #1A1A1A;
+      --muted:      #6B6560;
+      --border:     #D2D0CB;
+      --blue:       #4C64FF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      padding: 0 48px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: height 0.3s ease;
+    }
+    #nav.compact { height: 54px; }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.01em;
+      position: relative; padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px; background: var(--text);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px;
+      background: var(--text); color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+      text-decoration: none; border-radius: 180px;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    .nav-cta:active { transform: translateY(0); }
+    .nav-cta:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    /* ─── ARTICLE HEADER ───────────────────────────────────── */
+    #article-header {
+      padding: 128px 48px 0;
+    }
+
+    .article-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      transition: color 0.2s ease, gap 0.2s ease;
+      margin-bottom: 52px;
+    }
+    .article-back:hover { color: var(--text); gap: 4px; }
+
+    .article-header-inner {
+      max-width: 760px; margin: 0 auto;
+    }
+
+    .article-cat {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 24px;
+    }
+    .cat-dot { width: 5px; height: 5px; background: var(--blue); border-radius: 50%; }
+
+    .article-title {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(32px, 4.2vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .article-lead {
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .article-meta-bar {
+      display: flex; align-items: center; gap: 20px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .meta-name {
+      font-size: 13px; font-weight: 500; color: var(--text);
+      display: block;
+    }
+    .meta-role { font-size: 11px; color: var(--muted); }
+    .meta-sep { width: 1px; height: 28px; background: var(--border); }
+    .meta-date { font-size: 12px; color: var(--muted); }
+    .meta-read {
+      margin-left: auto;
+      font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .meta-read-icon { color: var(--blue); }
+
+    /* ─── ARTICLE BODY ─────────────────────────────────────── */
+    #article-body {
+      padding: 72px 48px 112px;
+    }
+
+    .article-content {
+      max-width: 680px; margin: 0 auto;
+    }
+
+    .article-content p {
+      font-size: 17px;
+      line-height: 1.88;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .article-content p.lead {
+      font-size: 19px;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .article-content h2 {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(21px, 2vw, 28px);
+      line-height: 1.2;
+      color: var(--text);
+      margin-top: 64px;
+      margin-bottom: 20px;
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 56px 0;
+      padding: 40px 48px;
+      background: var(--off-white);
+      border-left: 3px solid var(--blue);
+    }
+    .pull-quote p {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(19px, 1.8vw, 24px) !important;
+      line-height: 1.4 !important;
+      color: var(--text) !important;
+      font-style: italic;
+      margin: 0 !important;
+    }
+
+    /* Article divider */
+    .article-hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0;
+    }
+
+    /* ─── AUTHOR BOX ───────────────────────────────────────── */
+    .author-box {
+      margin-top: 72px;
+      padding: 36px;
+      background: var(--off-white);
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    .author-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .author-name {
+      font-family: 'Silesianum', serif;
+      font-weight: 600; font-size: 18px;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .author-bio {
+      font-size: 13px; line-height: 1.72; color: var(--muted);
+    }
+
+    /* ─── TAGS ─────────────────────────────────────────────── */
+    .article-tags-wrap {
+      max-width: 680px; margin: 48px auto 0;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .tags-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .tags {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .tag {
+      padding: 6px 14px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--border);
+      color: var(--muted); border-radius: 180px;
+    }
+
+    /* ─── BACK TO BLOG ─────────────────────────────────────── */
+    #back-strip {
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+      padding: 48px;
+    }
+    .back-strip-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+    }
+    .back-strip-inner p {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(18px, 2vw, 26px);
+      color: var(--text);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; border: none; cursor: pointer;
+      padding: 14px 28px; border-radius: 180px;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), background 0.2s ease;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--text); color: var(--text);
+    }
+    .btn-outline:hover { background: var(--text); color: var(--white); transform: translateY(-1px); }
+
+    /* ─── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,0.45);
+      padding: 52px 48px;
+    }
+    .footer-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+    .footer-copy { font-size: 12px; margin-top: 8px; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-size: 12px; color: rgba(255,255,255,0.4);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+    /* ─── SCROLL REVEAL ────────────────────────────────────── */
+    .rv {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .rv.in { opacity: 1; transform: translateY(0); }
+    .rv.d1 { transition-delay: 0.1s; }
+    .rv.d2 { transition-delay: 0.2s; }
+
+    /* ─── MOBILE ────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #article-header { padding: 96px 24px 0; }
+      #article-body { padding: 48px 24px 72px; }
+      .pull-quote { padding: 28px 24px; margin: 40px 0; }
+      .author-box { flex-direction: column; gap: 16px; }
+      #back-strip { padding: 40px 24px; }
+      .back-strip-inner { flex-direction: column; align-items: flex-start; }
+      footer { padding: 40px 24px; }
+      .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+      .article-meta-bar { flex-wrap: wrap; gap: 12px; }
+      .meta-read { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+<header id="nav" role="banner">
+  <a href="../index.html" class="nav-logo" aria-label="Brands Foundation">
+    <img src="../brand/logo_black.svg" alt="Brands Foundation" />
+  </a>
+  <nav aria-label="Nawigacja główna">
+    <ul class="nav-links">
+      <li><a href="../index.html#problem">Znamy to</a></li>
+      <li><a href="../index.html#about">Kim jesteśmy</a></li>
+      <li><a href="../index.html#process">Jak działamy</a></li>
+      <li><a href="../index.html#proof">Już działamy</a></li>
+      <li><a href="index.html" class="active">Blog</a></li>
+    </ul>
+  </nav>
+  <a href="../index.html#contact" class="nav-cta">Porozmawiajmy →</a>
+</header>
+
+
+<!-- ═══ ARTICLE HEADER ══════════════════════════════════════════ -->
+<section id="article-header">
+
+  <a href="index.html" class="article-back">← Wróć do bloga</a>
+
+  <div class="article-header-inner">
+
+    <div class="article-cat rv">
+      <span class="cat-dot"></span>
+      Branding · Śląsk
+    </div>
+
+    <h1 class="article-title rv">
+      Czy marka tworzy miejsce, czy miejsce tworzy markę?
+    </h1>
+
+    <p class="article-lead rv">
+      Katowice są dziś jednym z najciekawszych przykładów tego, jak branding działalności deweloperskiej zaczyna wpływać nie tylko na sprzedaż mieszkań, ale wręcz na sposób myślenia o całych częściach miasta.
+    </p>
+
+    <div class="article-meta-bar rv">
+      <div class="meta-author">
+        <div>
+          <span class="meta-name">Aleksandra Śliwa</span>
+          <span class="meta-role">Legal, Brands Foundation</span>
+        </div>
+      </div>
+      <div class="meta-sep"></div>
+      <span class="meta-date">2026</span>
+      <div class="meta-read">
+        <span class="meta-read-icon">◷</span>
+        7 minut czytania
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ HERO IMAGE ═══════════════════════════════════════════════ -->
+<div style="padding: 48px 48px 0; max-width: 1240px; margin: 0 auto;">
+  <img src="../content/copy/article_04.png"
+       alt="Czy marka tworzy miejsce, czy miejsce tworzy markę"
+       style="width:100%; height: clamp(280px, 40vw, 520px); object-fit:cover; display:block;" />
+</div>
+
+
+<!-- ═══ ARTICLE BODY ═════════════════════════════════════════════ -->
+<section id="article-body">
+  <article class="article-content rv">
+
+    <p class="lead">Z jednej strony mamy miejsca, które swoją markę stworzyły organicznie — bez strategii marketingowej, bez identyfikacji wizualnej, bez opowieści przygotowanej przez wyspecjalizowaną agencję. Z drugiej strony mamy inwestycje, nad których marką starannie pracowano, by później stały się realnym miejscem do życia, a nie tylko kolejnym, przypadkowym budynkiem.</p>
+
+    <h2>Tauzen — kiedy miejsce wyprzedza markę</h2>
+
+    <p>Szczególnym przykładem pierwszego zjawiska jest katowicki „Tauzen", czyli Osiedle Tysiąclecia. Twórcy osiedla nie projektowali „marki". Projektowali miejsce do życia — z charakterystyczną architekturą, układem urbanistycznym, bliskością Parku Śląskiego, własną tożsamością i bardzo wyraźnym charakterem.</p>
+
+    <p>A jednak po latach to właśnie miejsce stworzyło markę. Dziś praktycznie nikt nie mówi „Osiedle Tysiąclecia". Mówi się „Tauzen". Ta nazwa funkcjonuje samodzielnie, budzi konkretne skojarzenia i niesie za sobą określony styl życia.</p>
+
+    <p>Co ciekawe, współczesne inwestycje powstające w tej okolicy bardzo często próbują korzystać z tej istniejącej już siły miejsca. Powstaje więc coś, co można nazwać „nowym Tauzenem" — inwestycje, które próbują przypiąć się do marki stworzonej przez lokalizację, historię i doświadczenie mieszkańców. Mamy też „Tauzen Park" — małą galerię handlową przylegającą bezpośrednio do Osiedla Tysiąclecia.</p>
+
+    <h2>Nikiszowiec — autentyczność jako fundament</h2>
+
+    <p>Podobną historię opowiada nam Nikiszowiec. To miejsce przez lata przeszło drogę od nieco zapuszczonego i zapomnianego osiedla robotniczego do jednej z najmocniejszych marek miejskich na Śląsku. Ogromną rolę odegrała tutaj charakterystyczna architektura — Nikisz jest jedynym tego typu osiedlem w Polsce — autentyczność miejsca i konsekwentne budowanie narracji wokół śląskiej tożsamości.</p>
+
+    <p>Ale równie ważne okazały się wydarzenia, gastronomia i kultura. Promujące nowoczesną, lokalną kuchnię knajpy takie jak Prohibicja czy Cafe Byfyj, galerie, atelier artystyczne Grzegorza Chudego czy lokalne inicjatywy stworzyły wokół Nikiszowca pewien styl życia i emocję, która zaczęła przyciągać ludzi z zewnątrz i nakręciła szeroko rozumianą turystykę.</p>
+
+    <p>Dziś inwestycje realizowane w pobliżu Nikiszowca często komunikują się właśnie przez bliskość tego miejsca. Nie budują marki od zera — korzystają z marki już istniejącej. Flagowym przykładem jest osiedle Nowy Nikiszowiec.</p>
+
+    <div class="pull-quote">
+      <p>„Najsilniejsze marki mieszkaniowe nie powstają wyłącznie z marketingu ani wyłącznie z lokalizacji. Powstają wtedy, gdy branding spotyka się z realnym doświadczeniem miejsca."</p>
+    </div>
+
+    <h2>Pierwsza Dzielnica — marka zaprojektowana od zera</h2>
+
+    <p>Na drugim biegunie dzisiejszych rozważań znajduje się Pierwsza Dzielnica — osiedle wybudowane od zera na terenach pokopalnianych, ale przede wszystkim — wymyślone od zera miejsce. Od początku nie była komunikowana jako zwykłe osiedle mieszkaniowe. To była opowieść o nowym stylu życia. O nowej miejskiej dzielnicy. O miejscu funkcjonującym w bezpośrednim sąsiedztwie kultury, architektury i przestrzeni publicznych Strefy Kultury.</p>
+
+    <p>I co najciekawsze — ta strategia rzeczywiście zaczęła działać urbanistycznie. Pierwsza Dzielnica nie funkcjonuje dziś wyłącznie jako nazwa inwestycji. Zaczyna funkcjonować jako określenie fragmentu miasta. Widać to choćby po języku rynku nieruchomości. Inwestycje realizowane w okolicy — takie jak Atal czy Noho — często określane są jako inwestycje „przy Pierwszej Dzielnicy". To bardzo interesujący moment, w którym marka wykreowana przez dewelopera zaczyna definiować otoczenie.</p>
+
+    <h2>Fabryka Porcelany — trzecia droga</h2>
+
+    <p>Bardzo ciekawym przykładem jest również katowicka Fabryka Porcelany, która pokazuje jeszcze inny model budowania marki miejsca. To nie jest ani klasyczny przypadek Tauzena, gdzie marka powstała całkowicie organicznie, ani model Pierwszej Dzielnicy, gdzie najpierw wykreowano markę, a następnie budowano wokół niej nową miejską tkankę.</p>
+
+    <p>W przypadku Fabryki Porcelany marka została oparta na autentyczności już istniejącego miejsca. Deweloper nie stworzył nowej historii, lecz wykorzystał industrialne dziedzictwo, historyczną zabudowę i śląski charakter przestrzeni, budując wokół nich nową funkcję i nowy styl życia. To właśnie dlatego Fabryka Porcelany działa dziś szerzej niż zwykły projekt biurowo-usługowy — stała się miejscem spotkań, wydarzeń, gastronomii i kreatywnego biznesu.</p>
+
+    <p>Co istotne, ludzie nie jadą tam wyłącznie „do biura", ale po prostu „do Fabryki Porcelany". I być może właśnie w tym tkwi siła najlepiej zaprojektowanych miejsc — nie próbują wymyślać nowej tożsamości, ale potrafią wydobyć i opowiedzieć tę, która już istnieje.</p>
+
+    <hr class="article-hr" />
+
+    <p>I chyba właśnie tutaj pojawia się najciekawszy wniosek. Można stworzyć świetną nazwę, identyfikację wizualną i kampanię sprzedażową — ale jeśli ludzie nie poczują życia pod skórą tkanki miejskiej, marka pozostanie wyłącznie reklamą, gołym logo. Z drugiej strony nawet najlepsza lokalizacja nie stworzy dziś silnej marki bez świadomej narracji, bez spójnej tożsamości i bez doświadczenia, które mieszkańcy chcą współtworzyć.</p>
+
+    <p>Katowice są dziś fascynującym przykładem obu tych procesów jednocześnie.</p>
+
+    <!-- Author Box -->
+    <div class="author-box rv">
+      <div>
+        <div class="author-label">Autorka</div>
+        <div class="author-name">Aleksandra Śliwa</div>
+        <p class="author-bio">Radczyni prawna specjalizująca się w prawie nieruchomości i projektach inwestycyjnych. Autochtonka śląska zaangażowana w działania na rzecz języka i kultury śląskiej. Śląsk traktuje jako punkt odniesienia swoich wartości.</p>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- Tags -->
+  <div class="article-tags-wrap rv">
+    <div class="tags-label">Tematy</div>
+    <div class="tags">
+      <span class="tag">Branding</span>
+      <span class="tag">Śląsk</span>
+      <span class="tag">Katowice</span>
+      <span class="tag">Marka miejsca</span>
+      <span class="tag">Nieruchomości</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══ BACK TO BLOG ═════════════════════════════════════════════ -->
+<div id="back-strip">
+  <div class="back-strip-inner rv">
+    <p>Więcej artykułów na blogu</p>
+    <a href="index.html" class="btn btn-outline">← Wróć do bloga</a>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <img src="../brand/logo_white.svg" alt="Brands Foundation" />
+      </div>
+      <div class="footer-copy">© 2025 Brands Foundation. Wszelkie prawa zastrzeżone.</div>
+    </div>
+    <div class="footer-links">
+      <a href="../index.html">Strona główna</a>
+      <a href="../index.html#contact">Kontakt</a>
+      <a href="index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  /* Nav compact on scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('compact', window.scrollY > 80);
+  });
+
+  /* Scroll reveal */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
