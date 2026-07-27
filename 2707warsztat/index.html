@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Personal Branding z AI — materiały z warsztatu | Brands Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  @font-face {
+    font-family: 'Silesianum';
+    src: url('../brand/fonts/Silesianum-SemiBold.otf') format('opentype');
+    font-weight: 600; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Silesianum';
+    src: url('../brand/fonts/Silesianum-Bold.otf') format('opentype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --white:      #ffffff;
+    --off-white:  #EDE9E6;
+    --card:       #ffffff;
+    --text:       #1A1A1A;
+    --muted:      #6B6560;
+    --border:     #D2D0CB;
+    --blue:       #4C64FF;
+    --blue-dark:  #2944F0;
+    --blue-soft:  #EBEEFF;
+    --green:      #45C44B;
+    --green-dark: #2EAE34;
+    --mono-bg:    #1A1A1A;
+    --mono-ink:   #EDE9E6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--off-white);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+  }
+  header.page {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  header.page .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 600;
+  }
+  header.page h1 {
+    font-family: 'Silesianum', serif;
+    font-weight: 600;
+    font-size: clamp(30px, 4.2vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 14px 0 14px;
+  }
+  header.page .sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  nav.jump {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0 0;
+  }
+  nav.jump a {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 16px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  nav.jump a:hover { border-color: var(--blue); color: var(--blue); }
+  section {
+    margin: 64px 0;
+  }
+  section > h2 {
+    font-family: 'Silesianum', serif;
+    font-weight: 600;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  section > .section-intro {
+    color: var(--muted);
+    margin-bottom: 24px;
+    max-width: 680px;
+  }
+  .prompt-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin-bottom: 20px;
+  }
+  .prompt-card .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  .prompt-card h3 {
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+  }
+  .task {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    margin: 0 0 14px;
+  }
+  .task strong {
+    color: var(--blue);
+  }
+  .prompt-card .when {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 14px;
+  }
+  .prompt-box {
+    position: relative;
+    background: var(--mono-bg);
+    color: var(--mono-ink);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88rem;
+    white-space: pre-wrap;
+    line-height: 1.55;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.1);
+    color: var(--mono-ink);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,0.2); }
+  .copy-btn.copied { background: var(--green); border-color: var(--green); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--blue-soft);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--blue);
+    width: 32%;
+  }
+  tr:last-child td, tr:last-child th { border-bottom: none; }
+  .example-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+  }
+  .example-block h4 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .example-block .label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .example-block .post {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
+  .tag-good { color: var(--green-dark); font-weight: 600; font-size: 0.82rem; }
+  .tag-off { color: var(--text); font-weight: 700; font-size: 0.82rem; }
+  .note {
+    background: var(--blue-soft);
+    border-left: 4px solid var(--blue);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+  footer.page {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <div class="eyebrow">Brands Foundation · Warsztat</div>
+  <h1>Personal Branding z AI</h1>
+  <div class="sub">Prompty i przykłady z warsztatu — do wglądu podczas sesji i do samodzielnej pracy po jej zakończeniu.</div>
+  <nav class="jump">
+    <a href="#prompty">Prompty</a>
+    <a href="#przyklad">Przykład demonstracyjny</a>
+    <a href="#szablon">Szablon głosu marki</a>
+  </nav>
+</header>
+
+<section id="prompty">
+  <h2>5 promptów</h2>
+  <p class="section-intro">Każdy działa w darmowej wersji Claude, ChatGPT albo Gemini. Zanim zaczniesz: wypełnij na papierze elevator pitch, listę wartości i suwaki — to jest materiał wejściowy do promptu 1.</p>
+
+  <div class="prompt-card">
+    <h3><span class="num">1</span>Budowa szablonu głosu marki</h3>
+    <div class="task"><strong>Zadanie:</strong> weź wypełnione ćwiczenia — elevator pitch, moje wartości, suwaki. Wklej je w całości w miejsca wskazane w prompcie poniżej i wyślij. Nic więcej nie musisz dopisywać.</div>
+    <div class="prompt-box" data-copy>Jestem radnym/radną miasta Katowice. Wykonałem/wykonałam trzy ćwiczenia budujące moją markę osobistą: elevator pitch, listę wartości i dwa arkusze suwaków opisujących ton głosu. Wklejam wszystkie trzy poniżej.
+
+Na tej podstawie zbuduj mi szablon głosu marki w 7 polach:
+1. Wyróżnik
+2. Dlaczego to robię
+3. 3 tematy, o których mówię najczęściej
+4. Ton głosu (na podstawie suwaków)
+5. Do kogo mówię
+6. Słowa i zwroty, które są moje
+7. Czego nigdy nie robię
+
+Pola 3 i 6 nie wynikają wprost z żadnego z trzech ćwiczeń — wywnioskuj je sam: tematy z problemu i unikalnej wartości w moim elevator pitchu, charakterystyczne słowa z dosłownych sformułowań, których użyłem/am. Oznacz te dwa pola jako propozycję, nie pytaj mnie o nie dodatkowo. Jeśli jednak cały materiał jest zbyt ubogi, żeby zbudować z niego sensowny szablon — nie zgaduj na siłę, dopytaj mnie wprost o brakujący element.
+
+Mój elevator pitch:
+[WKLEJ CAŁE ĆWICZENIE 1]
+
+Moje wartości:
+[WKLEJ CAŁE ĆWICZENIE 2]
+
+Moje suwaki:
+[WKLEJ CAŁE ĆWICZENIE 3]</div>
+    <button class="copy-btn" data-copy-btn>Kopiuj</button>
+  </div>
+
+  <div class="prompt-card">
+    <h3><span class="num">·</span>Krok 2: zastosowanie na prawdziwym temacie</h3>
+    <div class="task"><strong>Zadanie:</strong> pomyśl o prawdziwym temacie ze swojej ostatniej pracy w radzie (uchwała, budżet, interwencja). Wklej jego fragment razem ze swoim szablonem głosu marki z promptu 1 do promptu poniżej. Efekt: gotowy, prawdziwy post do publikacji.</div>
+    <div class="prompt-box" data-copy>Jestem radnym/radną miasta Katowice. Napisz mi gotowy post na Facebooka/Instagram na podstawie tematu z mojej pracy w radzie, w moim głosie marki, który opisuję poniżej. To ma być post, nie streszczenie dokumentu — punktem wyjścia jest temat, nie wierność wobec sformułowań źródła.
+
+Mój głos marki:
+[WKLEJ TU SZABLON Z PROMPTU 1]
+
+Temat / fragment uchwały, budżetu albo notatki z sesji, na którym ma się opierać post:
+[WKLEJ FRAGMENT UCHWAŁY/BUDŻETU/NOTATKI]
+
+Wymagania wobec posta:
+- Zacznij od zdania, które przyciągnie uwagę — nie od nazwy uchwały ani numeru paragrafu
+- Konkret zamiast ogólników: kwoty, daty, lokalizacja, co się realnie zmienia dla mieszkańca
+- Zero żargonu urzędowego i skrótów bez wyjaśnienia
+- Długość i ton gotowe do wklejenia na Facebooka/Instagram bez dalszej obróbki
+- Trzymaj się faktów z materiału źródłowego — nie dodawaj obietnic ani szczegółów, których tam nie ma</div>
+    <button class="copy-btn" data-copy-btn>Kopiuj</button>
+  </div>
+
+  <div class="prompt-card">
+    <h3><span class="num">2</span>Sprawdzian spójności</h3>
+    <div class="task"><strong>Zadanie:</strong> wklej gotowy szablon głosu marki z promptu 1, a poniżej draft posta, który chcesz sprawdzić przed publikacją — najlepiej ten z Kroku 2.</div>
+    <div class="prompt-box" data-copy>Oto mój szablon głosu marki:
+
+[WKLEJ TU SZABLON Z PROMPTU 1]
+
+Poniżej wklejam draft posta, który chcę opublikować. Sprawdź, czy jest spójny z moim głosem marki. Wskaż konkretnie: co pasuje, co odstaje, i zaproponuj 2-3 poprawki, które przybliżą tekst do mojego głosu, nie zmieniając jego sensu.
+
+Draft posta:
+[WKLEJ DRAFT]</div>
+    <button class="copy-btn" data-copy-btn>Kopiuj</button>
+  </div>
+
+  <div class="prompt-card">
+    <h3><span class="num">3</span>Persona: Zadowolony Mieszkaniec Katowic</h3>
+    <div class="when">Stress-test przekazu — sprawdź, jak zareaguje przychylny odbiorca.</div>
+    <div class="task"><strong>Zadanie:</strong> wklej treść, którą planujesz opublikować (np. post z Kroku 2), i sprawdź reakcję.</div>
+    <div class="prompt-box" data-copy>Wciel się w rolę mieszkańca Katowic o imieniu i charakterze, jaki uznasz za wiarygodny. Ma około 40-55 lat, mieszka w Katowicach od lat, głosuje w każdych wyborach, ogólnie dobrze ocenia zmiany w mieście i docenia pracę radnych — ale nie jest bezkrytycznym fanem, tylko kimś, kto naprawdę śledzi, co się dzieje, i ma swoje zdanie.
+
+Przeczytam Ci treść, którą planuję opublikować jako radny/radna. Zareaguj tak, jak faktycznie zareagowałby taki mieszkaniec — szczerze, w pierwszej osobie, z własnym tonem. Powiedz, co Cię przekonuje, co budzi sympatię, a jeśli coś jest niejasne albo zbyt ogólnikowe — powiedz i to. Nie chwal na siłę.
+
+Oto treść do oceny:
+[WKLEJ TREŚĆ]</div>
+    <button class="copy-btn" data-copy-btn>Kopiuj</button>
+  </div>
+
+  <div class="prompt-card">
+    <h3><span class="num">4</span>Persona: Krytyczny Mieszkaniec Katowic</h3>
+    <div class="when">Stress-test przekazu — sprawdź, jak zareaguje sceptyczny odbiorca. Cel: świadomy wybór, nie zadowolenie wszystkich naraz.</div>
+    <div class="task"><strong>Zadanie:</strong> ta sama treść co w prompcie 3, druga persona — porównaj obie reakcje.</div>
+    <div class="prompt-box" data-copy>Wciel się w rolę mieszkańca Katowic o imieniu i charakterze, jaki uznasz za wiarygodny. Ma około 40-55 lat, mieszka w Katowicach od lat, głosuje, ale jest sceptyczny wobec władzy — pilnuje obietnic wyborczych, nie zauważa łatwo zmian na plus, zawsze znajdzie coś do wytknięcia. To nie jest hejter bez argumentów — to ktoś, kto naprawdę czyta uchwały i pamięta, co było obiecane.
+
+Przeczytam Ci treść, którą planuję opublikować jako radny/radna. Zareaguj tak, jak faktycznie zareagowałby taki mieszkaniec — szczerze, w pierwszej osobie. Wskaż konkretnie, co budzi Twoją nieufność, jakiej informacji brakuje, gdzie przekaz brzmi jak pusty slogan. Nie wymyślaj zarzutów znikąd — trzymaj się tego, co faktycznie jest (albo czego brakuje) w treści.
+
+Oto treść do oceny:
+[WKLEJ TREŚĆ]</div>
+    <button class="copy-btn" data-copy-btn>Kopiuj</button>
+    <div class="note">Cel obu person to nie jest napisanie posta, który zadowoli obie naraz — wygładzony pod wszystkich przekaz traci charakter. Persony służą do tego, żeby świadomie wiedzieć, kogo danym przekazem się zyskuje, a kogo traci.</div>
+  </div>
+
+  <div class="prompt-card">
+    <h3><span class="num">5</span>Napisz post na podstawie tematu z rady</h3>
+    <div class="when">Z uchwały czy fragmentu budżetu — gotowy post w Twoim głosie marki, nie streszczenie dokumentu. To jest prompt użyty w "Kroku 2: zastosowanie" powyżej.</div>
+    <div class="task"><strong>Zadanie:</strong> wklej fragment uchwały, budżetu albo notatki z sesji, nad którą naprawdę pracowałeś/aś, oraz swój szablon głosu marki z promptu 1.</div>
+    <div class="prompt-box" data-copy>Jestem radnym/radną miasta Katowice. Napisz mi gotowy post na Facebooka/Instagram na podstawie tematu z mojej pracy w radzie, w moim głosie marki, który opisuję poniżej. To ma być post, nie streszczenie dokumentu — punktem wyjścia jest temat, nie wierność wobec sformułowań źródła.
+
+Mój głos marki:
+[WKLEJ TU SZABLON Z PROMPTU 1]
+
+Temat / fragment uchwały, budżetu albo notatki z sesji, na którym ma się opierać post:
+[WKLEJ FRAGMENT UCHWAŁY/BUDŻETU/NOTATKI]
+
+Wymagania wobec posta:
+- Zacznij od zdania, które przyciągnie uwagę — nie od nazwy uchwały ani numeru paragrafu
+- Konkret zamiast ogólników: kwoty, daty, lokalizacja, co się realnie zmienia dla mieszkańca
+- Zero żargonu urzędowego i skrótów bez wyjaśnienia
+- Długość i ton gotowe do wklejenia na Facebooka/Instagram bez dalszej obróbki
+- Trzymaj się faktów z materiału źródłowego — nie dodawaj obietnic ani szczegółów, których tam nie ma</div>
+    <button class="copy-btn" data-copy-btn>Kopiuj</button>
+  </div>
+</section>
+
+<section id="przyklad">
+  <h2>Przykład demonstracyjny</h2>
+  <p class="section-intro">Fikcyjna postać — Tomasz Barański, radny z Ligoty-Panewnik — żeby pokazać działanie promptów bez użycia danych prawdziwej osoby.</p>
+
+  <div class="example-block">
+    <div class="label">Do promptu 1 — wejściowe ćwiczenia</div>
+    <h4>Elevator pitch</h4>
+    <div class="post">Dla rodzin z dziećmi i dojeżdżających do pracy z Ligoty-Panewnik, których problemem jest długi, niewygodny dojazd do centrum i słabo rozwinięta infrastruktura przystankowa — ja, Tomasz Barański, jestem radnym-inżynierem, który czyta projekty drogowe, zamiast tylko nad nimi głosować. W wyjątkowy sposób pilnuję realnych terminów i budżetów inwestycji transportowych, nie tylko je zapowiadam. W przeciwieństwie do radnych, którzy ogłaszają sukcesy bez podania kwot i dat, wyróżnia mnie łączenie wykształcenia inżynierskiego z codzienną pracą w komisji infrastruktury.</div>
+    <h4 style="margin-top:16px;">Moje wartości</h4>
+    <div class="post">Nienegocjowalne: nie obiecuję niczego, czego nie potwierdził wydział. Chcę, żeby zapamiętano, że Ligota-Panewniki przestały być "na końcu kolejki" inwestycyjnej. Nie zagłosuję za projektem, którego nie przeczytałem w całości.</div>
+    <h4 style="margin-top:16px;">Suwaki (skrót)</h4>
+    <div class="post">Bliżej: Przyjazna, Inkluzywna, Kojąca, lekko Śmiała · Formalna (nie sztywna), zdecydowanie Stabilna, raczej Cicha, zdecydowanie Sprawcza</div>
+  </div>
+
+  <div class="example-block">
+    <div class="label">Do Kroku 2 — fragment uchwały</div>
+    <h4>Fikcyjna uchwała budżetowa</h4>
+    <div class="post">Uchwała nr XLII/512/26 Rady Miasta Katowice z dnia 12 marca 2026 r. w sprawie zmiany budżetu miasta Katowice na rok 2026 — dział 600, rozdział 60004, § 6050: zwiększa się wydatki majątkowe o kwotę 3 200 000 zł z przeznaczeniem na modernizację infrastruktury przystankowej oraz budowę zatoki autobusowej w ciągu ul. Panewnickiej na odcinku od skrzyżowania z ul. Zadole do granicy dzielnicy, wraz z dostosowaniem do wymogów dostępności architektonicznej.</div>
+  </div>
+
+  <div class="example-block">
+    <div class="label">Do promptów 2, 3 i 4 — draft posta</div>
+    <h4>Draft przed publikacją <span class="tag-off">celowo niedoskonały</span></h4>
+    <div class="post">Świetna wiadomość dla mieszkańców Panewnik! Rada Miasta przegłosowała dodatkowe środki na infrastrukturę przystankową w naszej dzielnicy. To ważny krok w stronę lepszej komunikacji miejskiej dla wszystkich mieszkańców. Dziękuję za zaufanie!</div>
+  </div>
+</section>
+
+<section id="szablon">
+  <h2>Szablon głosu marki — oczekiwany efekt</h2>
+  <p class="section-intro">Tak powinien wyglądać efekt promptu 1 po wklejeniu ćwiczeń powyżej — punkt odniesienia, żeby sprawdzić, czy synteza AI działa poprawnie. Pola 3 i 6 są wywnioskowane, nie podane wprost.</p>
+  <table>
+    <tr><th>1. Wyróżnik</th><td>Jedyny radny w komisji infrastruktury z wykształceniem inżynierskim — nie tylko głosuję nad projektami drogowymi, potrafię je czytać</td></tr>
+    <tr><th>2. Dlaczego to robię</th><td>Dorastałem w Ligocie, kiedy dojazd do centrum zajmował 50 minut autobusem z dwiema przesiadkami. Chcę, żeby moje dzieci miały to lepiej</td></tr>
+    <tr><th>3. 3 tematy <em>(wywnioskowane)</em></th><td>Transport publiczny w dzielnicach peryferyjnych; zieleń miejska i retencja wody; przejrzystość wydatków na inwestycje drogowe</td></tr>
+    <tr><th>4. Ton głosu</th><td>Rzeczowy, konkretny, z liczbami. Unikam: obietnic bez dat, atakowania innych radnych, żargonu urzędowego</td></tr>
+    <tr><th>5. Do kogo mówię</th><td>Mieszkańcy Ligoty-Panewnik, zwłaszcza rodziny z dziećmi i dojeżdżający do pracy</td></tr>
+    <tr><th>6. Charakterystyczne słowa <em>(wywnioskowane)</em></th><td>"sprawdzone, nie obiecane"; "to nie jest wizja, to jest harmonogram"</td></tr>
+    <tr><th>7. Czego nigdy nie robię</th><td>Nie obiecuję terminów, których nie potwierdził wydział; nie kasuję krytycznych komentarzy; nie chwalę się cudzą pracą jako swoją</td></tr>
+  </table>
+</section>
+
+<footer class="page">Brands Foundation · materiały z warsztatu Personal Branding z AI</footer>
+
+</div>
+
+<script>
+document.querySelectorAll('[data-copy-btn]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var box = btn.previousElementSibling;
+    var text = box.textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      var original = btn.textContent;
+      btn.textContent = 'Skopiowano ✓';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1800);
+    });
+  });
+});
+</script>
+</body>
+</html>
