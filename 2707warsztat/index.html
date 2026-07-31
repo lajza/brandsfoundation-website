@@ -54,6 +54,15 @@
     margin-bottom: 48px;
     text-align: center;
   }
+  header.page .site-logo {
+    display: inline-block;
+    margin-bottom: 28px;
+  }
+  header.page .site-logo img {
+    height: 30px;
+    width: auto;
+    display: block;
+  }
   header.page .eyebrow {
     font-size: 13px;
     letter-spacing: 0.14em;
@@ -245,10 +254,26 @@
     margin-top: 8px;
   }
   footer.page {
+    background: var(--text);
+    color: rgba(255,255,255,0.45);
     text-align: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin-top: 60px;
+    border-radius: 16px;
+    padding: 36px 24px;
+    margin-top: 80px;
+  }
+  footer.page img {
+    height: 26px;
+    filter: brightness(0) invert(1);
+    margin-bottom: 12px;
+  }
+  footer.page .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  footer.page .footer-legal {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
   }
 </style>
 </head>
@@ -256,6 +281,9 @@
 <div class="wrap">
 
 <header class="page">
+  <a href="https://brandsfoundation.com/" class="site-logo" aria-label="Brands Foundation">
+    <img src="../brand/logo_black.svg" alt="Brands Foundation" />
+  </a>
   <div class="eyebrow">Brands Foundation · Warsztat</div>
   <h1>Personal Branding z AI</h1>
   <div class="sub">Prompty i przykłady z warsztatu - do wglądu podczas sesji i do samodzielnej pracy po jej zakończeniu.</div>
@@ -421,7 +449,11 @@ Wymagania wobec posta:
   </table>
 </section>
 
-<footer class="page">Brands Foundation · materiały z warsztatu Personal Branding z AI</footer>
+<footer class="page">
+  <img src="../brand/logo_white.svg" alt="Brands Foundation" />
+  <p class="footer-copy">Materiały z warsztatu Personal Branding z AI</p>
+  <p class="footer-legal">Fundacja Brands · KRS 0001247441 · NIP 6343073071 · REGON 544990228</p>
+</footer>
 
 </div>
 
