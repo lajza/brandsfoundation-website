@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marka z cegły. Najpierw był Browar — Brands Foundation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('../brand/fonts/Silesianum-Regular.otf') format('opentype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('../brand/fonts/Silesianum-RegularItalic.otf') format('opentype');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Silesianum';
+      src: url('../brand/fonts/Silesianum-SemiBold.otf') format('opentype');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+  </style>
+
+  <style>
+    /* ─── BRAND TOKENS ─────────────────────────────────────── */
+    :root {
+      --white:      #ffffff;
+      --off-white:  #EDE9E6;
+      --mid-gray:   #D2D0CB;
+      --text:       #1A1A1A;
+      --muted:      #6B6560;
+      --border:     #D2D0CB;
+      --blue:       #4C64FF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      padding: 0 48px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: height 0.3s ease;
+    }
+    #nav.compact { height: 54px; }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.01em;
+      position: relative; padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 1px; background: var(--text);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px;
+      background: var(--text); color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+      text-decoration: none; border-radius: 180px;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+    .nav-cta:active { transform: translateY(0); }
+    .nav-cta:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    /* ─── ARTICLE HEADER ───────────────────────────────────── */
+    #article-header {
+      padding: 128px 48px 0;
+    }
+
+    .article-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      transition: color 0.2s ease, gap 0.2s ease;
+      margin-bottom: 52px;
+    }
+    .article-back:hover { color: var(--text); gap: 4px; }
+
+    .article-header-inner {
+      max-width: 760px; margin: 0 auto;
+    }
+
+    .article-cat {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 24px;
+    }
+    .cat-dot { width: 5px; height: 5px; background: var(--blue); border-radius: 50%; }
+
+    .article-title {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(32px, 4.2vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .article-lead {
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .article-meta-bar {
+      display: flex; align-items: center; gap: 20px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .meta-name {
+      font-size: 13px; font-weight: 500; color: var(--text);
+      display: block;
+    }
+    .meta-role { font-size: 11px; color: var(--muted); }
+    .meta-sep { width: 1px; height: 28px; background: var(--border); }
+    .meta-date { font-size: 12px; color: var(--muted); }
+    .meta-read {
+      margin-left: auto;
+      font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .meta-read-icon { color: var(--blue); }
+
+    /* ─── ARTICLE BODY ─────────────────────────────────────── */
+    #article-body {
+      padding: 72px 48px 112px;
+    }
+
+    .article-content {
+      max-width: 680px; margin: 0 auto;
+    }
+
+    .article-content p {
+      font-size: 17px;
+      line-height: 1.88;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .article-content p.lead {
+      font-size: 19px;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .article-content h2 {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(21px, 2vw, 28px);
+      line-height: 1.2;
+      color: var(--text);
+      margin-top: 64px;
+      margin-bottom: 20px;
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 56px 0;
+      padding: 40px 48px;
+      background: var(--off-white);
+      border-left: 3px solid var(--blue);
+    }
+    .pull-quote p {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(19px, 1.8vw, 24px) !important;
+      line-height: 1.4 !important;
+      color: var(--text) !important;
+      font-style: italic;
+      margin: 0 !important;
+    }
+
+    /* Article divider */
+    .article-hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0;
+    }
+
+    /* ─── AUTHOR BOX ───────────────────────────────────────── */
+    .author-box {
+      margin-top: 72px;
+      padding: 36px;
+      background: var(--off-white);
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    .author-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .author-name {
+      font-family: 'Silesianum', serif;
+      font-weight: 600; font-size: 18px;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .author-bio {
+      font-size: 13px; line-height: 1.72; color: var(--muted);
+    }
+
+    /* ─── TAGS ─────────────────────────────────────────────── */
+    .article-tags-wrap {
+      max-width: 680px; margin: 48px auto 0;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .tags-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .tags {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .tag {
+      padding: 6px 14px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--border);
+      color: var(--muted); border-radius: 180px;
+    }
+
+    /* ─── BACK TO BLOG ─────────────────────────────────────── */
+    #back-strip {
+      background: var(--off-white);
+      border-top: 1px solid var(--border);
+      padding: 48px;
+    }
+    .back-strip-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+    }
+    .back-strip-inner p {
+      font-family: 'Silesianum', serif;
+      font-weight: 600;
+      font-size: clamp(18px, 2vw, 26px);
+      color: var(--text);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; border: none; cursor: pointer;
+      padding: 14px 28px; border-radius: 180px;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), background 0.2s ease;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--text); color: var(--text);
+    }
+    .btn-outline:hover { background: var(--text); color: var(--white); transform: translateY(-1px); }
+
+    /* ─── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,0.45);
+      padding: 52px 48px;
+    }
+    .footer-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+    .footer-copy { font-size: 12px; margin-top: 8px; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-size: 12px; color: rgba(255,255,255,0.4);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+    /* ─── SCROLL REVEAL ────────────────────────────────────── */
+    .rv {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .rv.in { opacity: 1; transform: translateY(0); }
+    .rv.d1 { transition-delay: 0.1s; }
+    .rv.d2 { transition-delay: 0.2s; }
+
+    /* ─── MOBILE ────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #article-header { padding: 96px 24px 0; }
+      #article-body { padding: 48px 24px 72px; }
+      .pull-quote { padding: 28px 24px; margin: 40px 0; }
+      .author-box { flex-direction: column; gap: 16px; }
+      #back-strip { padding: 40px 24px; }
+      .back-strip-inner { flex-direction: column; align-items: flex-start; }
+      footer { padding: 40px 24px; }
+      .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+      .article-meta-bar { flex-wrap: wrap; gap: 12px; }
+      .meta-read { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+<header id="nav" role="banner">
+  <a href="../index.html" class="nav-logo" aria-label="Brands Foundation">
+    <img src="../brand/logo_black.svg" alt="Brands Foundation" />
+  </a>
+  <nav aria-label="Nawigacja główna">
+    <ul class="nav-links">
+      <li><a href="../index.html#problem">Znamy to</a></li>
+      <li><a href="../index.html#about">Kim jesteśmy</a></li>
+      <li><a href="../index.html#process">Jak działamy</a></li>
+      <li><a href="../index.html#proof">Już działamy</a></li>
+      <li><a href="/blog/" class="active">Blog</a></li>
+    </ul>
+  </nav>
+  <a href="../index.html#contact" class="nav-cta">Porozmawiajmy →</a>
+</header>
+
+
+<!-- ═══ ARTICLE HEADER ══════════════════════════════════════════ -->
+<section id="article-header">
+
+  <a href="/blog/" class="article-back">← Wróć do bloga</a>
+
+  <div class="article-header-inner">
+
+    <div class="article-cat rv">
+      <span class="cat-dot"></span>
+      Branding · Śląsk
+    </div>
+
+    <h1 class="article-title rv">
+      Marka z cegły. Najpierw był Browar
+    </h1>
+
+    <p class="article-lead rv">
+      Zastanawiając się nad tym, czy marka tworzy miejsce, czy miejsce tworzy markę, trafiamy tym razem do Browaru Obywatelskiego w Tychach. Tutaj odpowiedź wydaje się wyjątkowo prosta: najpierw było miejsce.
+    </p>
+
+    <div class="article-meta-bar rv">
+      <div class="meta-author">
+        <div>
+          <span class="meta-name">Aleksandra Śliwa</span>
+          <span class="meta-role">Legal, Brands Foundation</span>
+        </div>
+      </div>
+      <div class="meta-sep"></div>
+      <span class="meta-date">2026</span>
+      <div class="meta-read">
+        <span class="meta-read-icon">◷</span>
+        12 minut czytania
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ HERO IMAGE ═══════════════════════════════════════════════ -->
+<div style="padding: 48px 48px 0; max-width: 1240px; margin: 0 auto;">
+  <img src="../content/copy/article_05.jpg"
+       alt="Marka z cegły. Najpierw był Browar"
+       style="width:100%; height: clamp(280px, 40vw, 520px); object-fit:cover; display:block;" />
+</div>
+
+
+<!-- ═══ ARTICLE BODY ═════════════════════════════════════════════ -->
+<section id="article-body">
+  <article class="article-content rv">
+
+    <p class="lead">Nie trafiamy na pustą działkę, dla której ktoś wymyślił dobrze brzmiącą nazwę, identyfikację wizualną i historię potrzebną do jej sprzedaży. Trafiamy do starego browaru — z jego architekturą, przemysłową przeszłością i pamięcią ludzi, którzy przez ponad sto lat przychodzili tu do pracy. Dopiero na tym fundamencie wyrósł Tichauer: marka, pod którą mieszczą się dziś kultura, sztuka, gastronomia, biznes, wydarzenia i zwyczajne spędzanie czasu.</p>
+
+    <h2>Wszystko zaczęło się od miejsca</h2>
+
+    <p>Browar Obywatelski powstał pod koniec XIX wieku, na zachód od peronów tyskiego dworca, jako konkurencja dla Tyskich Browarów Książęcych. Przez ponad sto lat był przede wszystkim fabryką — miejscem o bardzo konkretnej funkcji, własnym rytmie i znaczeniu dla miasta.</p>
+
+    <p>Kiedy pod koniec lat 90. zakończono produkcję, pozostał cały kompleks: dawna warzelnia, rozlewnia, słodownia, susznia, ceglane elewacje, stalowe konstrukcje, wieża, dziedziniec i charakterystyczna sylweta browaru. Zniknęła działalność, dla której zbudowano te obiekty, ale nie zniknęła ich tożsamość. I chyba właśnie to okazało się najważniejsze.</p>
+
+    <p>Mogliśmy potraktować takie miejsce jak kłopotliwy relikt przemysłowej przeszłości: kosztowny w utrzymaniu, trudny do przebudowy i nieprzystający do współczesnych standardów. Można było również odnowić budynki, podzielić je i wypełnić przypadkowymi funkcjami, pozostawiając ze starego browaru jedynie cegłę na elewacji.</p>
+
+    <p>Wybrano jednak inną drogę. To historia, architektura i układ kompleksu stały się punktem wyjścia do stworzenia nowej marki.</p>
+
+    <p>Dzisiaj, kiedy trafiamy do Browaru Obywatelskiego, nie przyjeżdżamy wyłącznie zwiedzić dawnego zakładu. Możemy zobaczyć wystawę w Tichauer Art Gallery, zjeść kolację w Tichauer Restaurant, przyjść na koncert, spotkanie autorskie, konferencję albo pokaz mody. W IT Loftparku pracują firmy, studia i showroomy, a otwarty dziedziniec łączy poszczególne części kompleksu i staje się naturalnym miejscem spotkań.</p>
+
+    <p>Na stronie Tichauera nazwano te elementy trzema filarami jednej historii: galeria inspiruje, restauracja karmi, Loftpark daje przestrzeń do pracy i rozwoju, a dziedziniec spina je w całość. I rzeczywiście, dopiero razem tworzą one pełny obraz tego miejsca.</p>
+
+    <p>Każda z tych funkcji mogłaby istnieć osobno. Restaurację można przecież otworzyć w centrum miasta, galerię w nowym, białym budynku, a biura w przeszklonym parku biznesowym. Tutaj jednak wszystkie czerpią z Browaru i wzajemnie się wzmacniają. Przychodzimy na wystawę, ale zostajemy na kolację. Trafiamy na wydarzenie, a przy okazji odkrywamy galerię. Przyjeżdżamy na spotkanie biznesowe i dopiero wtedy zauważamy, że kompleks żyje również poza godzinami pracy.</p>
+
+    <p>W ten sposób Browar ponownie staje się częścią miasta, a nie tylko zachowanym śladem jego przeszłości.</p>
+
+    <h2>Tichauer — marka napisana przez miejsce</h2>
+
+    <p>W przypadku Browaru Obywatelskiego marka nie jest opowieścią dołączoną do inwestycji. Jest współczesnym rozwinięciem historii, która zaczęła się dużo wcześniej.</p>
+
+    <p>Nazwa Tichauer, industrialny charakter wnętrz i sposób funkcjonowania całego kompleksu nie dają się łatwo przenieść gdzie indziej. Możemy oczywiście stworzyć kolejną restaurację, galerię czy przestrzeń eventową, ale bez starej rozlewni, słodowni, dziedzińca, cegły i pamięci Browaru otrzymamy już zupełnie inną markę.</p>
+
+    <p>To miejsce nadało jej wiarygodność, język i charakter. Podpowiedziało również, jak wiele różnych aktywności może się pod nią zmieścić. Dzięki temu Tichauer nie oznacza jednego lokalu ani jednej instytucji. Dla jednych będzie galerią sztuki, dla innych restauracją, przestrzenią pracy, miejscem koncertu albo rodzinnego wydarzenia.</p>
+
+    <p>Hasło „Better Together" nie jest więc jedynie marketingowym dodatkiem. Dobrze oddaje sposób, w jaki działa cały Browar. Jego siła nie leży w pojedynczej funkcji, ale w tym, że sztuka, kuchnia, biznes i wydarzenia spotykają się w jednym krajobrazie i korzystają z tej samej historii.</p>
+
+    <p>W Browarze nie odtworzono dawnego zakładu i nie zamknięto go w muzealnej gablocie. Jednocześnie nie potraktowano przemysłowej przeszłości jak modnej scenografii. Tożsamość miejsca nie została wymyślona na nowo, tylko przełożona na współczesny język.</p>
+
+    <div class="pull-quote">
+      <p>„Tichauer wyrósł z Browaru, a nie Browar z marki Tichauer."</p>
+    </div>
+
+    <h2>Kultura dobrze czuje się w przemyśle</h2>
+
+    <p>Zresztą na Śląsku znamy ten mechanizm bardzo dobrze. Mamy szczególny talent do wpuszczania sztuki i kultury tam, gdzie wcześniej wydobywano węgiel, walcowano cynk, warzono piwo albo naprawiano przemysłowe maszyny.</p>
+
+    <p>Być może dlatego, że hale przemysłowe nigdy nie są zupełnie neutralne. Mają skalę, fakturę, światło i niedoskonałości, których nie da się wiernie odtworzyć w nowym budynku. Nie musimy ich specjalnie stylizować ani dopisywać im historii. Ona już jest obecna — w cegle, stali, maszynach, układzie pomieszczeń, a często również w pamięci mieszkańców.</p>
+
+    <p>Trafiamy więc do Szybu Wilson, gdzie galeria sztuki współczesnej działa w dawnej cechowni i łaźni kopalni Wieczorek. Nie otrzymała nowej, efektownej nazwy wymyślonej przez agencję. Pozostał Szyb Wilson, bo to miejsce już miało własną tożsamość.</p>
+
+    <p>Sztuka nie zajęła tam przypadkowej hali. Weszła do przestrzeni, która od początku wpływała na sposób jej pokazywania i odbioru. Wysokie, surowe wnętrza nie są tylko tłem dla obrazów i instalacji — same stają się częścią doświadczenia. Twórcom galerii od początku towarzyszyło zresztą bardzo śląskie w swojej wymowie hasło: „To, co zabrał przemysł, kultura musi odzyskać".</p>
+
+    <p>Podobny proces obserwujemy w Walcowni w Szopienicach. Produkcję blachy cynkowej zakończono tam w 2002 roku, ale pozostała autentyczna hala i zachowany ciąg technologiczny. Kiedy obiekt został ponownie otwarty jako Muzeum Hutnictwa Cynku i przestrzeń wydarzeń, nie trzeba było wymyślać dla niego nowej tożsamości. Wystarczyło pozwolić, aby Walcownia nadal była Walcownią — choć już w zupełnie inny sposób.</p>
+
+    <p>Jeszcze inaczej relacja miejsca i marki ułożyła się w Muzeum Śląskim. Instytucja i jej marka istniały długo przed przeprowadzką na teren dawnej kopalni Katowice. Jednak dopiero ta lokalizacja nadała im zupełnie nowy wymiar. Muzeum opowiadające o historii, kulturze i tożsamości regionu znalazło siedzibę w miejscu, które samo jest częścią tej opowieści.</p>
+
+    <p>Większą część kompleksu ukryto pod ziemią, a na powierzchni pozostawiono zabudowania dawnej kopalni i przeszklone bryły doświetlające ekspozycje. Dzisiaj trudno już oddzielić Muzeum Śląskie od miejsca, w którym działa. Dawna kopalnia wpłynęła na markę muzeum, muzeum zmieniło znaczenie terenu pokopalnianego, a razem współtworzą Strefę Kultury — jeden z najmocniejszych symboli współczesnej przemiany Katowic.</p>
+
+    <p>Szyb Wilson, Walcownia i Muzeum Śląskie nie tworzą oczywiście jednej formalnej strefy. Układają się jednak w coś, co wydaje nam się znacznie ciekawsze: górnośląską mapę kultury, która nie odcina się od przemysłowego krajobrazu, tylko potrafi wykorzystać go jako swój największy atut.</p>
+
+    <h2>Nie każde stare mury stają się marką</h2>
+
+    <p>Oczywiście sama cegła nie wystarczy. Na Śląsku nie brakuje pięknych obiektów poprzemysłowych, które po remoncie nadal pozostają trochę obok codziennego życia. Są odnowione, czasem nawet efektowne, ale odwiedzamy je wyłącznie przy okazji pojedynczego wydarzenia albo oglądamy z zewnątrz.</p>
+
+    <p>Browar Obywatelski działa inaczej, bo nie jest uzależniony od jednego powodu przyjazdu. Możemy tu przyjść na wystawę, koncert, spotkanie, kolację albo wydarzenie biznesowe. Możemy przyjechać w konkretnym celu, ale równie dobrze znaleźć kolejny już na miejscu. Dzięki temu dawna przestrzeń produkcyjna znowu ma swój rytm, tyle że wyznaczają go dziś nie kolejne zmiany pracowników browaru, lecz wystawy, wydarzenia, rozmowy, praca i spotkania.</p>
+
+    <p>Najbardziej interesujące jest to, że Tichauer nie próbuje dominować nad Browarem Obywatelskim. Nie przykrywa go nowym brandingiem i nie zmienia w industrialną dekorację. To Browar — swoją architekturą, historią i atmosferą — stworzył warunki, w których marka mogła powstać.</p>
+
+    <hr class="article-hr" />
+
+    <p>Najpierw więc było miejsce. Później wyrosła z niego marka, pod którą zmieściło się wiele różnych działalności i wiele różnych powodów, żeby tu przyjechać.</p>
+
+    <p>I chyba właśnie takie marki są najtrudniejsze do podrobienia. Nie możemy ich skopiować ani przenieść pod inny adres, bo ich najważniejszym elementem nie jest nazwa, logo czy nawet konkretna oferta.</p>
+
+    <p>Ich najważniejszym elementem jest miejsce.</p>
+
+    <!-- Author Box -->
+    <div class="author-box rv">
+      <div>
+        <div class="author-label">Autorka</div>
+        <div class="author-name">Aleksandra Śliwa</div>
+        <p class="author-bio">Radczyni prawna specjalizująca się w prawie nieruchomości i projektach inwestycyjnych. Autochtonka śląska zaangażowana w działania na rzecz języka i kultury śląskiej. Śląsk traktuje jako punkt odniesienia swoich wartości.</p>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- Tags -->
+  <div class="article-tags-wrap rv">
+    <div class="tags-label">Tematy</div>
+    <div class="tags">
+      <span class="tag">Branding</span>
+      <span class="tag">Śląsk</span>
+      <span class="tag">Tychy</span>
+      <span class="tag">Marka miejsca</span>
+      <span class="tag">Rewitalizacja</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══ BACK TO BLOG ═════════════════════════════════════════════ -->
+<div id="back-strip">
+  <div class="back-strip-inner rv">
+    <p>Więcej artykułów na blogu</p>
+    <a href="/blog/" class="btn btn-outline">← Wróć do bloga</a>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <img src="../brand/logo_white.svg" alt="Brands Foundation" />
+      </div>
+      <div class="footer-copy">© 2025 Brands Foundation. Wszelkie prawa zastrzeżone.</div>
+    </div>
+    <div class="footer-links">
+      <a href="../index.html">Strona główna</a>
+      <a href="../index.html#contact">Kontakt</a>
+      <a href="/blog/">Blog</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  /* Nav compact on scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('compact', window.scrollY > 80);
+  });
+
+  /* Scroll reveal */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
